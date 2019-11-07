@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  redis-db:
+    image: redis
+    container_name: "redis-db"
+    ports:
+      - 6379:6379
+    command: redis-server --appendonly yes --requirepass redis080
+    volumes:
+      - /home/huongnv/docker/redis/data:/data
+    restart: always

@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  mongo-db:
+    image: mongo
+    restart: always
+    environment:
+      MONGODB_USER: root
+      MONGODB_PASS: mongo080
+      #iports:
+        #      - 27017:27017
+    volumes:
+      - ./db:/data/db
+    command: mongod --auth
+
+  mongo-web:
+    image: mongoclient/mongoclient:latest
+    restart: always
+    ports:
+      - 192.168.10.80:8081:3000
+    links:
+      - mongo-db
+        #environment:
+        #ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+        #ME_CONFIG_MONGODB_SERVER: mongo-db
+        #ME_CONFIG_BASICAUTH_USERNAME: root
+        #ME_CONFIG_BASICAUTH_PASSWORD: mongo080
+
